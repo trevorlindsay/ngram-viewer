@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Latest compiled and minified plotly.js JavaScript -->
+    <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<title>Ngram Viewer</title>
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+
+
+<body>
+    <!--Search bar-->
+    <div class="page" align="center">
+        <h1> <a href="{{url_for('main', data=None)}}">Search for Ngrams!</a></h1>
+        <div class="nonheader">
+            <form action="{{url_for('search')}}" method="post">
+                <d1>
+                    <dd><input title="Search Terms" type="text" name="ngrams">
+                    <dd><input type="submit" value="Search">
+                </d1>
+            </form>
+                <div class="8b07dc48-03a1-4c9d-a068-d0e5def1973d loading" style="color: rgb(50,50,50);"></div>
+                 <div id="8b07dc48-03a1-4c9d-a068-d0e5def1973d" style="height: 525; width: 100%;"
+                 class="plotly-graph-div">
+                 </div>
+                 <script type="text/javascript">
+                 Plotly.plot("8b07dc48-03a1-4c9d-a068-d0e5def1973d", [{"y": [3, 2, 8, 52, 11], "x": [2012, 2013, 2014, 2015, 2016], "type": "scatter", "name": "dog", "mode": "lines+markers"}, {"y": [1, 0, 9, 6, 2], "x": [2012, 2013, 2014, 2015, 2016], "type": "scatter", "name": "cat", "mode": "lines+markers"}], {}, {"linkText": "Export to plot.ly", "showLink": true}).then(function() {
+    $(".8b07dc48-03a1-4c9d-a068-d0e5def1973d.loading").remove();
+})
+                 </script>
+                 
+            <ul class="data">
+                {% if not data %}
+                {% else %}
+                    {% for datapoint in data %}
+                        <li>{{datapoint}}
+                    {% else %}
+                        <li><em>Unbelievable. Those terms were never used!</em>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</body>

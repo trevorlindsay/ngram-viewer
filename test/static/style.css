@@ -1,0 +1,7 @@
+body            { font-family: "Times New Roman"; background: #eee; }
+a, h1, h2       { color: #377ba8; }
+a               { text-decoration: none; }
+h1, h2          { font-family: "Times New Roman", serif; }
+h1              { border-bottom: 2px solid #eee; }
+h2              { font-size: 1.2em; }
+ul              { list-style-type: none; }
