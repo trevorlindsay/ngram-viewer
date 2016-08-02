@@ -3,18 +3,20 @@ from flask import render_template
 
 from search import search as searchBooks
 from build_graph import build_graph, new_iplot
+from build_index import readIndexFromFile
 
 
 app = Flask(__name__)
 graph = None
+index = readIndexFromFile()
 
 @app.route('/search', methods=['POST'])
 def search():
 
-    global graph
+    global graph, index
 
     ngrams = request.form['ngrams']
-    data = searchBooks(ngrams)
+    data = searchBooks(ngrams, index)
 
     if not data:
         return redirect(url_for('main'))
