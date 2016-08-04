@@ -105,6 +105,3 @@ def readIndexFromFile():
     index.updateBooks()
     return index
 
-
-print updateMainIndex().books
-

@@ -21,7 +21,8 @@ def search():
     if not data:
         return redirect(url_for('main'))
 
-    graph = new_iplot(build_graph(data))
+    graph_data, xticks = build_graph(data)
+    graph = new_iplot(graph_data, xticks)
     return redirect(url_for('show_results'))
 
 
@@ -48,7 +49,7 @@ def show_results():
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
 
 
 

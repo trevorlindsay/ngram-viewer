@@ -7,6 +7,7 @@ import json
 
 def build_graph(ngram_count):
 
+    global xaxis_ticks
     data = []
 
     # Create a line graph for each ngram
@@ -21,16 +22,19 @@ def build_graph(ngram_count):
         )
         data.append(trace)
 
-    return data
+    return data, x
 
 
-def new_iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
+def new_iplot(figure_or_data, xaxis_ticks, show_link=True, link_text='Export to plot.ly',
           validate=True):
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
+    figure['layout'] = dict(xaxis=dict(tickvals=xaxis_ticks))
+
     width = figure.get('layout', {}).get('width', '100%')
     height = figure.get('layout', {}).get('height', 525)
+
     try:
         float(width)
     except (ValueError, TypeError):
