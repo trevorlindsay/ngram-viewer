@@ -42,9 +42,9 @@ def buildBookIndex(pathname):
     for line in f:
         for i, token in enumerate(tokenizer(line.strip().lower().decode('utf-8'))):
             token = stemmer.stem(token)
-            if token not in index:
+            if token not in index and '|' not in token:
                 index[token] = [bookId, [str(pos + i)]]
-            else:
+            elif '|' not in token:
                 index[token][-1].append(str(pos + i))
         pos += i + 1
 
@@ -59,6 +59,7 @@ def buildMainIndex():
     for book in getPaths():
         index.merge(buildBookIndex(book))
 
+    writeIndexToFile(index)
     return index
 
 
@@ -77,6 +78,7 @@ def updateMainIndex():
             if book not in index.books:
                 index.merge(buildBookIndex(book))
 
+    writeIndexToFile(index)
     return index
 
 
@@ -104,4 +106,7 @@ def readIndexFromFile():
 
     index.updateBooks()
     return index
+
+
+buildMainIndex()
 

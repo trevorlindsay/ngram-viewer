@@ -8,8 +8,10 @@ def search(ngrams, index):
     if ngrams == '':
         return None
 
-    # Just in case spaces and commas were used to separate ngrams
-    ngrams = ngrams.replace(', ', ',').encode('utf-8').lower().split(',')
+    if len(ngrams) > 1:
+        ngrams = ngrams.replace(', ', ',').encode('utf-8').lower().split(',')
+    else:
+        ngrams = ngrams.encode('utf-8').lower()
 
     years = []
     for dir in next(os.walk('.'))[1]:
